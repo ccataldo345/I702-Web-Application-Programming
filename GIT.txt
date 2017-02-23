@@ -1,0 +1,18 @@
+git clone https://github.com/ccataldo345/I702-Web-Application-Programming.git
+
+git init
+
+git status   (check status / differences in git repo and local machine)
+
+git add .   #(add to git repo all the new and modified files)
+
+git commit -m "Initial commit"
+
+git remote add origin https://github.com/ccataldo345/I702-Web-Application-Programming.git
+
+git add .gitignore 	#(add only 1 file)
+
+git commit -m 'Add gitignore'
+
+git push https://github.com/ccataldo345/I702-Web-Application-Programming.git
+
