@@ -5,7 +5,7 @@
 >>>>>>> master-Chris
 <?php
 #require_once "config.php";
-include "header.php";
+//include "header.php";
 $conn = new mysqli("localhost", "test", "t3st3r123", "test");
 if ($conn->connect_error)
   die("Connection to database failed:" .
