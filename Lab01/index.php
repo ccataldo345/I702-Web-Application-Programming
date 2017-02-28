@@ -1,3 +1,7 @@
+<?php
+require_once ("config.php");
+?>
+
 <!DOCTYPE html>
 <html>
   <head><link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet"> <!-- from google fonts -->
@@ -7,7 +11,6 @@
     <link rel="css/style.css" type="text/css"/>
     <script type="text/javascript" src="js/main.js"></script>
     <meta name="viewport" content="width=device-width, user-scalable=no"/><!-- Disable zoom on smartphone -->
-    <?php include "config.php" ?>
   </head>
   <body>
 	 <header>
@@ -26,27 +29,41 @@
       <!-- This is the product list page -->
 	  <ul>
 	  <?php /*echo "This is hello from PHP!"*/;
-
+		
 		$conn = new mysqli("localhost", "test", "t3st3r123", "test");
 	 	$results = $conn->query("SELECT * FROM ccataldo_shop_product;");
-
+		
 		while ($row = $results->fetch_assoc()) {
 			?>
+
 				<li>
-					<a href="description.php?id=<?=$row['id']?>">
-						<?=$row["name"]?></a>
-						<?=$row["price"]?> EUR
-				</li>
-				<?php
+        
+				
+            <p style="border: 2px dotted;">
+              <a href="description.php?id=<?=$row['id']?>">
+            <?=$row["name"]?></a>'      '         
+            <?=$row["price"]?> EUR
+            </p>
+
+        	</li>
+				
+    <?php
 		}
-
+ 
 		$conn->close();
-
+ 
 		?>
-		</ul>
-		</p>
+		
 
+    </ul>
+		</p>
+  
   </article>
+<form action="/action_page.php">
+  <input type="text" name="fname" placeholder="First name"><br>
+  <input type="text" name="lname" placeholder="Last name"><br>
+  <input type="submit" value="Submit">
+</form>
     <aside>
       <!-- Context specific links go here -->
     </aside>
@@ -56,5 +73,5 @@
       <a href="http://enos.itcollege.ee/~ccataldo">Enos Homepage</a><br />
     </footer>
   </body>
-
+ 
 </html>
