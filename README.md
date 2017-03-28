@@ -10,5 +10,5 @@ It consists of a small website which includes a webshop, using mysql, php and ja
 USAGE
 -----
 
-`index.html` <br />
+`index.php` <br />
  open [this_link](http://enos.itcollege.ee/~ccataldo/Lab01/index.php) in browser
