@@ -12,6 +12,7 @@ require_once ("config.php");
     <script type="text/javascript" src="js/main.js"></script>
     <meta name="viewport" content="width=device-width, user-scalable=no"/><!-- Disable zoom on smartphone -->
   </head>
+  
   <body>
 	 <header>
       <h1 style="font-family: Audiowide;">CHRIS WEBSHOP</h1>
@@ -20,7 +21,22 @@ require_once ("config.php");
     </header>
     <nav>
       <!-- Navigation links go here -->
+   
+  <form method="POST" action="login.php">
+  <input type="text" name="user"/>
+  <input type="password" name="password"/>
+  <input type="submit" value="Log in!"/>
+  </form> <!--Show the login form above-->
+  
+  <form method="POST" action="logout.php">
+  <input type="submit" value="Log out!"/>
+  <!--<a href="logout.php">Log out!</a><br />  <!--Put link to logout.php here-->
+
+<br />
+<br />
+      <a href="regform.php">New user? Please register here!</a><br />
     </nav>
+
     <section>
       <h3>Products list:</h3>
     </section>
@@ -59,11 +75,6 @@ require_once ("config.php");
 		</p>
   
   </article>
-<form action="/action_page.php">
-  <input type="text" name="fname" placeholder="First name"><br>
-  <input type="text" name="lname" placeholder="Last name"><br>
-  <input type="submit" value="Submit">
-</form>
     <aside>
       <!-- Context specific links go here -->
     </aside>

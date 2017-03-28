@@ -12,7 +12,7 @@ require_once ("config.php");
 
 		$product_id = intval($_POST["id"]);
 		if (array_key_exists($product_id, $_SESSION["cart"])) {
-			$_SESSION["cart"][$product_id] += 1;
+			$_SESSION["cart"][$product_id] += intval($_POST["count"]);
 		} else {
 			$_SESSION["cart"][$product_id] = 1;
 		}
@@ -24,8 +24,9 @@ require_once ("config.php");
 		echo $_POST["pname"];
 		echo ' > quantity: ';
 		echo $_POST["count"];
-		
-		
+
+
+
 		
 	?>
 <br />
