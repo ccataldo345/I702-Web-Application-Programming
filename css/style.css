@@ -1,31 +1,47 @@
-.header {
-    width: 300px;
-    height: 25px;
-    background-color: #5A68A5;
-    border-radius: 10px;
+
+p, ul, li, h1, h2, h3, h, a {
+    /* Audiowide font works only if the font CSS is included from Google */
+    font-family: "Audiowide", Verdana, Arial, sans-serif;
 }
 
-img {
-    width: 200px;
-    float: right;
+html, body {
+    margin: 0;
+    padding: 0;
+
 }
 
-h1 {
-    font-family: Verdana, sans-serif;
-    font-size: 18px;
-    text-align: center;
-    color: #ffffff;
+body {
+    padding: 0 1em;
+    background-color: #ECECEA;       /*cool colours: 558C89,#74AFAD,#D9853B,background:#ECECEA*/
 }
 
-p {
-    font-family: Tahoma, sans-serif;
+#content, header { /* This expects id="content" ;) */
+    margin: 0 auto;
+    padding: 0 1em;
+    max-width: 50em;
+    border: 1px solid #888;
+    background-color: white;
 }
 
-li {
-    font-family: Tahoma, sans-serif;
-    list-style-type: square;
+header {
+    color: #fff;
+    background-color: #74AFAD;
 }
 
-input {
-    width: 280px;
+#content, footer { /* This expects id="content" ;) */
+    margin: 0 auto;
+    padding: 0 1em;
+    max-width: 50em;
+    border: 1px solid #888;
+    background-color: white;
+}
+
+footer {
+    color: #fff;
+    background-color: #D9853B;
+}
+
+img { 
+    width: 800px;
+    height: 500px;
 }

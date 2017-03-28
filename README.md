@@ -11,4 +11,5 @@ USAGE
 -----
 
 `index.php` <br />
- open [this_link](http://enos.itcollege.ee/~ccataldo/Lab01/index.php) in browser
+or<br />
+  <a href="http://enos.itcollege.ee/~ccataldo/Lab01/index.php" target="_blank">Open this link in browser</a>
