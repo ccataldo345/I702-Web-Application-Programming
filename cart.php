@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     if ($_SESSION["cart"][$product_id] <= 0) {
         unset($_SESSION["cart"][$product_id]);
+        //$cart_tot = 0;
         //echo "You have no items in your shopping cart yet";
     }
 }
@@ -33,63 +34,85 @@ $results = $conn->query(
 
 $results or die("Database query failed:" . $conn->error);
 
+$cart_tot = 0;
+
 while ($row = $results->fetch_assoc()) {
   	$product_id = $row['id'];
   	if (array_key_exists($product_id, $_SESSION["cart"])) {
     	$count = $_SESSION["cart"][$product_id];
-?>
+    	$id_subtot = $row['price'] * $count;
+    	$cart_tot = $id_subtot;
+   ?>
 
 	  	<li>
 		    <a href="description.php?id=<?=$product_id;?>">
-		    <?=$row['name'];?></a> >>>
+		    <?=$row['name'];?></a> >>>   				<!--print product name-->
 		    
-		    quantity: <?=$count;?> 
+		    quantity: <?=$count;?>				<!--print product quantity--> 
 		      
-		    (unit price: <?=$row['price'];?> EUR) 
-
-		    >>> TOTAL PRICE: <?= $row['price'] * $count; ?> EUR
+		    (unit price: <?=$row['price'];?> EUR) 	<!--print product unit price-->
+			<span style="float:right;"> 	
+		    >>>&nbsp&nbsp&nbsp<?= $id_subtot; ?> EUR 			<!--print product tot price-->
+		  </span>  		    
 		    <br /><br />
+		    
 
-		    <!--add 1 item-->
-		    <form method="post">
+	  </li>
+
+	  <!--add 1 item-->
+	    <span style="float:left;"> 
+	    	<form method="post">
 		      <input type="hidden" name="id" value="<?=$product_id;?>"/>
 		      <input type="hidden" name="count" value="+1"/>
-		      <input type="submit" value="Add 1 item"/>
-		    </form>
+		      <input type="submit" value="+"/>
+	    	</form> 
+	    </span>
 
-		    <!--remove 1 item-->
-		    <form method="post">
-		      <input type="hidden" name="id" value="<?=$product_id;?>"/>
-		      <input type="hidden" name="count" value="-1"/>
-		      <input type="submit" value="Remove 1 item"/>
-		    </form>
+	    <!--remove 1 item-->
+	    <span style="float:left;"> 
+	    	<form method="post">
+		  		<input type="hidden" name="id" value="<?=$product_id;?>"/>
+	      	<input type="hidden" name="count" value="-1"/>
+	      	<input type="submit" value="-"/>
+	 	    </form>
+	 	  </span>
 
-		    <!--remove all items-->
+	    <!--remove all items-->
 		    <form method="post">
 		      <input type="hidden" name="id" value="<?=$product_id;?>"/>
 		      <input type="hidden" name="count" value="<?=-$count;?>" />
-		      <input type="submit" value="Remove all items"/>
+		      <input type="submit" value="Delete item"/>
 		    </form>
+	    <hr>
 
-		    <br /><br />
-
-	  </li>
 <?php
-	 }
-	 #echo "TOTAL ITEMS PRICE >>> '$row['price'] * $count' EUR";
-}   
+	}
+	else{
+		$cart_tot = 0;
+	}	 
+}
 
 $conn->close();
 ?>
-	
+
+<hr>
+ 
+<p>TOTAL SHOPPING CART VALUE
+	<span style="float: right";">
+		 >>>&nbsp&nbsp&nbsp<?=$cart_tot;?> EUR
+	</span>
+</p>
 <br />
-<br />
-<br />
-<br />
+
+<form method="post" action="placeorder.php">
+<input type="submit" value="Place order"/>
+</form>
+
 <br />
 	<a href="http://enos.itcollege.ee/~ccataldo/Lab01/print.php" target="_blank">Print your invoice</a><br />
 <br />
 <br />
-<a href="index.php">Back to product listing</a>
-
-<?php include "footer.php" ?>
+	<a href="index.php">Back to product listing</a>
+<br />
+<br />
+	<?php include "footer.php" ?>

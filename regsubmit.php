@@ -1,6 +1,5 @@
 <?php
-require_once ("config.php");
-
+require_once "config.php";
 include "header.php";
 
 $conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
@@ -10,7 +9,7 @@ if ($conn->connect_error)
 $conn->query("set names utf8");
  
 $statement = $conn->prepare(
-"INSERT INTO `ccataldo_shop_user` (
+"INSERT INTO `ccataldo_shop_users` (
     `email`,
     `password`,
     `first_name`,
@@ -28,7 +27,7 @@ VALUES (?, PASSWORD(?), ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 # is failing **before** that line so you have to manually check for errors like this:
 if (!$statement) die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
  
-$statement->bind_param("sssssssssss",
+$statement->bind_param("sssssssssss", //"s" stands for "String"
     $_POST["email"],
     $_POST["password"],
     $_POST["first_name"],
@@ -44,7 +43,7 @@ $statement->bind_param("sssssssssss",
 if ($statement->execute()) {
     echo "Registration was successful! <a href=\"index.php\">Back to main page</a>";
 } else {
-    if ($statement->errno == 1062) {
+    if (!$statement->errno == 1062) {
        // This will result in 200 OK
        echo "This e-mail is already registered";
     } else {
@@ -53,3 +52,9 @@ if ($statement->execute()) {
            $statement->errno . ") " . $statement->error);
     }
 }
+?>
+
+<?php
+include "footer.php";
+?>
+
