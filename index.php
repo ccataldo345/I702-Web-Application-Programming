@@ -12,13 +12,35 @@ if (!array_key_exists("timestamp", $_SESSION)) {
 }
 ?>
 
-<h3>HOME PAGE</h3>
-<p><small>You started visiting this page since <?=$_SESSION["timestamp"];?></small></p>
+<a class="icon-home" <h3>HOME PAGE</h3></a>
+<p><small>⏱ You started visiting this page since <?=$_SESSION["timestamp"];?></small></p>
 
 <?php
 
 // print "Hello %(salutation)s %(first_name)s %(last_name)s" % $row (if user is logged in!)
-if (array_key_exists("user", $_SESSION)) {
+if (!array_key_exists("user", $_SESSION)) {  //if no user is logged in
+//($_SESSION["user"]==null) {
+       // Otherwise offer login fields and button
+   ?>
+<p>Please log in</p>
+  <!--Show the login:--> 
+  <form method="POST" action="login.php">
+  <input type="text" name="email"/>
+  <input type="password" name="password" required />
+  <input type="submit" value="Log in!" required />
+  </form>
+  
+  <!--<a href="logout.php">Log out!</a><br />  <!--Put link to logout.php here
+  <form method="POST" action="logout.php">
+  <input type="submit" value="Log out!"/>-->
+
+<br />
+  
+  <a href="regform.php">New user? Please register here!</a><br />
+<?php 
+}
+
+elseif (array_key_exists("user", $_SESSION)) {  //if some user is logged in
     // In case we put user id in the $_SESSION["user"] we need
     // to perform another SQL query to get the full name of the user:
     $results = $conn->query(
@@ -30,45 +52,30 @@ if (array_key_exists("user", $_SESSION)) {
     echo $row["last_name"];
 
     ?> 
+<br />
+<br />
     <form method="POST" action="logout.php">
     <input type="submit" value="Log out!"/>
-  <?php
-} else {
-   // Otherwise offer login fields and button
-   ?>
-<p>Please log in</p>
-  <!--Show the login:--> 
-  <form method="POST" action="login.php">
-  <input type="text" name="user"/>
-  <input type="password" name="password"/>
-  <input type="submit" value="Log in!"/>
-  </form>
-  <?php 
-  } 
-  ?>
   
-  <!--<a href="logout.php">Log out!</a><br />  <!--Put link to logout.php here
-  <form method="POST" action="logout.php">
-  <input type="submit" value="Log out!"/>-->
-
-
-<br />
-  
-  <a href="regform.php">New user? Please register here!</a><br />
   <br />
+  <br />
+
   <a href="cart.php">Go to shopping cart</a><br /><br />
+<?php
+}
+?>
 
-  <h3>Products list:</h3>
+  <h3>🛍 Products list:</h3>
     
-	  <ul>
-	  <?php /*echo "This is hello from PHP!"*/;
-		
-		$results = $conn->query("SELECT * FROM ccataldo_shop_products;");
-		
-		while ($row = $results->fetch_assoc()) {
-			?>
+    <ul>
+    <?php /*echo "This is hello from PHP!"*/;
+    
+    $results = $conn->query("SELECT * FROM ccataldo_shop_products;");
+    
+    while ($row = $results->fetch_assoc()) {
+      ?>
 
-				<li>
+        <li>
            <p style="border: 1px outset;">
               <a href="description.php?id=<?=$row['id']?>">
             <?=$row["name"]?></a>
@@ -78,14 +85,14 @@ if (array_key_exists("user", $_SESSION)) {
             </span>
             </p>
         </li>
-				
+        
     <?php
-		}
+    }
  
-		$conn->close();
+    $conn->close();
  
-		?>
-	
+    ?>
+  
 
   <?php include "footer.php" ?>
 
