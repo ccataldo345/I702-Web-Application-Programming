@@ -28,6 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <h3>Your current shopping cart:</h3>
 
 <?php
+if($_SESSION["cart"]==null) { 
+        echo "<hr><br/><h3>Your shopping cart is empty</h3>";
+  } 
+  else {
+
 // update the cart contents
 $results = $conn->query(
 "SELECT id,name,price FROM ccataldo_shop_products;");
@@ -41,7 +46,7 @@ while ($row = $results->fetch_assoc()) {
   	if (array_key_exists($product_id, $_SESSION["cart"])) {
     	$count = $_SESSION["cart"][$product_id];
     	$id_subtot = $row['price'] * $count;
-    	$cart_tot = $id_subtot;
+    	$cart_tot = $cart_tot + $id_subtot;
    ?>
 
 	  	<li>
@@ -86,10 +91,8 @@ while ($row = $results->fetch_assoc()) {
 	    <hr>
 
 <?php
-	}
-	else{
-		$cart_tot = 0;
-	}	 
+		}
+	
 }
 
 $conn->close();
@@ -112,6 +115,11 @@ $conn->close();
 	<a href="http://enos.itcollege.ee/~ccataldo/Lab01/print.php" target="_blank">Print your invoice</a><br />
 <br />
 <br />
+
+<?php 
+}
+?>
+
 	<a href="index.php">Back to product listing</a>
 <br />
 <br />
