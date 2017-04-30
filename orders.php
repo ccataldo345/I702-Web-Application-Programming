@@ -1,12 +1,31 @@
 <?php
 require_once "config.php";
-include "header.php" ?>
-<a href="index.php">Back to product listing</a>
+include "header.php"; 
+include "dbconn.php"?>
+<br>
+<a href="index.php">Back to your profile</a>
+<br><br>
+<a href="cart.php">Back to shopping cart</a>
 <?php
-$conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
-if ($conn->connect_error)
-  die("Connection to database failed:" . $conn->connect_error);
-$conn->query("set names utf8");
+
+$statement = $conn->prepare("
+    SELECT
+        `order`.`id` AS `orderid`,
+        `order`.`created` AS `ordercreated`,
+        `order`.`paid` AS `paymentdate`,
+        `order`.`shipped` AS `shipmentdate`,
+        `product`.`id` AS `productid`,
+        `product`.`name` AS `productname`,
+        `product`.`price` AS `productprice`,
+        `order_item`.`count` AS `count`
+    FROM `order_item`
+    JOIN `order`
+        ON `order_item`.`order_id` = `order`.`id`
+    JOIN `product`
+        ON `order_item`.`product_id` = `product`.`id`
+    WHERE `order`.`user_id` = :userid
+    ORDER BY `order`.`created` DESC");
+
 // This is orders.php, again beginning copy-pasted from description.php
 $statement = $conn->prepare("SELECT * FROM `ccataldo_shop_orders` WHERE `user_id` = ?");
 if (!$statement) die("Prepare failed: (" . $conn->errno . ") " . $conn->error);
@@ -16,7 +35,8 @@ $statement->bind_param("i", $_SESSION["user"]);
 if (!$statement->execute()) die("Failed to execute statement");
 $results = $statement->get_result();
 ?>
-<h1>Orders</h1>
+<h2>Your orders</h2>
+<hr>
 <ul>
 <?php
   while ($row = $results->fetch_assoc()) { ?>

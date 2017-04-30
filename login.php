@@ -6,13 +6,7 @@ include "header.php";
 
 var_dump($_POST); // This is just to check that the data gets to server
 
-// This is copy-paste from description.php!
-
-
-$conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
-if ($conn->connect_error)
-  die("Connection to database failed:".$conn->connect_error);
-$conn->query("set names utf8");
+include "dbconn.php";
 
 $statement = $conn->prepare("SELECT * FROM ccataldo_shop_users WHERE email = ? AND password = PASSWORD(?)");
 if ($statement === FALSE) {

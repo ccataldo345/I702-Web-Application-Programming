@@ -1,13 +1,9 @@
 <?php
 require_once "config.php";
-include "header.php";
-?>
+include "header.php"; 
+include "dbconn.php"?>
 
 <?php
-$conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
-$conn or die("Database connection failed:" . $conn->error);
-$conn->query("set names utf8"); // Support umlaut characters
-
 // update the cart contents
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $product_id = intval($_POST["id"]);
@@ -19,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     if ($_SESSION["cart"][$product_id] <= 0) {
         unset($_SESSION["cart"][$product_id]);
-        //echo "<hr><br/><h3>Your shopping cart is empty</h3>";
+        //echo "<hr><br><h3>Your shopping cart is empty</h3>";
         //$cart_tot = 0;
         //echo "You have no items in your shopping cart yet";
     }
@@ -63,9 +59,9 @@ elseif (array_key_exists("user", $_SESSION)) {//1
 			      
 			    (unit price: <?=$row['price'];?> EUR) 	<!--print product unit price-->
 				<span style="float:right;"> 	
-			    >>>&nbsp&nbsp&nbsp<?= $id_subtot; ?> EUR 			<!--print product tot price-->
+			    >>>&nbsp;&nbsp;&nbsp;<?= $id_subtot; ?> EUR 			<!--print product tot price-->
 			  </span>  		    
-			    <br /><br />
+			    <br><br>
 			    
 
 		  </li>
@@ -108,19 +104,19 @@ elseif (array_key_exists("user", $_SESSION)) {//1
 	 
 	<p>TOTAL SHOPPING CART VALUE
 		<span style="float: right";">
-			 >>>&nbsp&nbsp&nbsp<?=$cart_tot;?> EUR
+			 >>>&nbsp;&nbsp;&nbsp;<?=$cart_tot;?> EUR
 		</span>
 	</p>
-	<br />
+	<br>
 
 	<form method="post" action="placeorder.php">
 	<input type="submit" value="Place order"/>
 	</form>
 
-	<br />
-		<a href="http://enos.itcollege.ee/~ccataldo/Lab01/print.php" target="_blank">Print your invoice</a><br />
-	<br />
-	<br />
+	<br>
+		<a href="http://enos.itcollege.ee/~ccataldo/Lab01/print.php" target="_blank">Print your invoice</a><br>
+	<br>
+	<br>
 
 	<?php 
 	}//2
@@ -136,7 +132,7 @@ else {
 
 	?>
 
-	<a href="index.php">Back to product listing</a>
-<br />
-<br />
+	<a href="index.php">Back to your profile</a>
+<br>
+<br>
 	<?php include "footer.php" ?>

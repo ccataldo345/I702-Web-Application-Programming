@@ -1,19 +1,12 @@
 <?php
 require_once "config.php";
-include "header.php";
-$conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
-if ($conn->connect_error)
-  die("Connection to database failed:" .
-    $conn->connect_error);
-$conn->query("set names utf8"); // Support umlaut characters
+include "header.php"; 
+include "dbconn.php";
 
 if (!array_key_exists("timestamp", $_SESSION)) {
   $_SESSION["timestamp"] = date('l jS \of F Y h:i:s A');
 }
 ?>
-
-<a><h3><i class="material-icons">home</i> HOME PAGE</h3></a>
-<p><small>⏱ You started visiting this page since <?=$_SESSION["timestamp"];?></small></p>
 
 <?php
 
@@ -22,21 +15,26 @@ if (!array_key_exists("user", $_SESSION)) {  //if no user is logged in
 //($_SESSION["user"]==null) {
        // Otherwise offer login fields and button
    ?>
-<p>Please log in <pre><i>(hint: aaa@aaa.com, aaa)</i></pre></p>
+
+<h3><a><i class="material-icons">home</i> HOME PAGE</a></h3>
+<p><small>⏱ You started visiting this page since <?=$_SESSION["timestamp"];?></small></p>
+<hr>
+
+<p>Please log in </p><pre><i>(hint: aaa@aaa.com, aaa)</i></pre>
   <!--Show the login:--> 
   <form method="POST" action="login.php">
   <input type="text" name="email"/>
-  <input type="password" name="password" required />
-  <input type="submit" value="Log in!" required />
+  <input type="password" name="password" required/>
+  <input type="submit" value="Log in!">
   </form>
   
-  <!--<a href="logout.php">Log out!</a><br />  <!--Put link to logout.php here
+  <!--<a href="logout.php">Log out!</a><br>  //Put link to logout.php here
   <form method="POST" action="logout.php">
   <input type="submit" value="Log out!"/>-->
 
-<br />
+<br>
   
-  <a href="regform.php">New user? Please register here!</a><br />
+  <a href="regform.php">New user? Please register here!</a><br>
 <?php 
 }
 
@@ -57,48 +55,52 @@ elseif (array_key_exists("user", $_SESSION)) {  //if some user is logged in
     <form method="POST" action="logout.php">
     <input type="submit" value="Log out"/>
   
-  <br />
-  <br />
+  <br>
+  <br>
 
-    <a href="cart.php"><i class="material-icons">shopping_cart</i> Go to shopping cart</a><br /><br />
+    <a href="cart.php"><i class="material-icons">shopping_cart</i> Go to your shopping cart</a><br><br>
     <!--https://material.io/icons/#ic_shopping_cart-->
+     
+    <a href="orders.php"><i class="material-icons">content_paste</i> View all your orders</a><br>
+
 <?php
 }
 ?>
 
+  <br><hr>
   <h3>🛍 Products list:</h3>
     
-	  <ul>
-	  <?php /*echo "This is hello from PHP!"*/;
-		
-		$results = $conn->query("SELECT * FROM ccataldo_shop_products;");
-		
-		while ($row = $results->fetch_assoc()) {
-			?>
+    <ul>
+    <?php /*echo "This is hello from PHP!"*/;
+    
+    $results = $conn->query("SELECT * FROM ccataldo_shop_products;");
+    
+    while ($row = $results->fetch_assoc()) {
+      ?>
 
-				<li>
+        <li>
            <p style="border: 1px outset;">
               <a href="description.php?id=<?=$row['id']?>">
             <?=$row["name"]?></a>
             <span style="float:right;">  
-            >>>&nbsp&nbsp&nbsp       
+            >>>&nbsp;&nbsp;&nbsp;       
             <?=$row["price"]?> EUR
             </span>
             </p>
         </li>
-				
+        
     <?php
-		}
+    }
+    
+    $conn->close();
  
-		$conn->close();
- 
-		?>
-	
+    ?>
+
+    </ul>
 
   <?php include "footer.php" ?>
 
-<br />
-<br />
-      <center><a href="http://enos.itcollege.ee/~ccataldo">Enos Homepage</a></center><br />
-
+<!--<br><br>
+      <center><a href="http://enos.itcollege.ee/~ccataldo">Enos Homepage</a></center><br>'
+-->
 

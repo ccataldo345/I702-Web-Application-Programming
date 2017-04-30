@@ -1,16 +1,12 @@
 <?php
 require_once "config.php";
-include "header.php";
-?>
+include "header.php"; 
+include "dbconn.php"?>
 
-<a href="index.php">Back to product listing</a>
+<br>
+<a href="index.php">Back to product listing</a><br>
 
 <?php
-$conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
-if ($conn->connect_error)
-  die("Connection to database failed:" .
-    $conn->connect_error);
-$conn->query("set names utf8"); // Support umlaut characters
 $statement = $conn->prepare(
   "SELECT `name`, `description`, `price` FROM" .
   " `ccataldo_shop_products` WHERE `id` = ?");
@@ -19,17 +15,16 @@ $statement->execute();
 $results = $statement->get_result();
 $row = $results->fetch_assoc();
 ?>
- 
-<span style="float:right;"><?=$row["price"];?> EUR</span>
-<h1><?=$row["name"];?></h1>
 
+<br><hr> 
+<h2><?=$row["name"];?></h2>
+<p><?=$row["price"];?> EUR</p>
+<hr>
  
 <p>
   <?=$row["description"];?>
 </p>
-
-<br />
-<br />
+<br>
 
 <?php
 if (array_key_exists("user", $_SESSION)) {

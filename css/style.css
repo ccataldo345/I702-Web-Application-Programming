@@ -1,5 +1,5 @@
 
-p, ul, li, h1, h2, h3, h, a {
+p, ul, li, h1, h2, h3, h, a, pre {
     /* Audiowide font works only if the font CSS is included from Google */
     font-family: "Audiowide", Verdana, Arial, sans-serif;
 }
@@ -26,6 +26,11 @@ body {
 header {
     color: #fff;
     background-color: #74AFAD;
+    text-align:center;
+}
+
+h1 {
+  text-align:center;
 }
 
 #content, footer { /* This expects id="content" ;) */

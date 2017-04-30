@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -7,9 +6,6 @@ if (!array_key_exists("cart", $_SESSION)) {
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-  <head>
     <meta charset="utf-8"/>  <!--Support umlaut characters-->
     <meta name="description" content="CHRIS WEBSHOP">
     <title>CHRIS WEBSHOP</title>
@@ -17,10 +13,11 @@ if (!array_key_exists("cart", $_SESSION)) {
     <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="js/main.js"></script>
 
-<br />
+    <br>
+    
+        <h1>CHRIS WEBSHOP</h1>
 
-<h1><center>CHRIS WEBSHOP</center></h1>
+      <div id="content">
 
-  </head>
-  <body>
-    <div id="content">
+
+      

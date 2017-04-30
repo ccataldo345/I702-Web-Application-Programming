@@ -2,11 +2,14 @@
 require_once "config.php";
 include "header.php";
 ?>
-<h3>REGISTRATION FORM</h3>
+<br><a href="index.php">Back to homepage</a><br>
+
+<br>
+<h2>REGISTRATION FORM</h2>
+<hr>
 
 <form method="post" action="regsubmit.php">
   <pre>
-  <div>
     <label for="email">E-mail: </label>
     <input type="email" name="email" required/>
 
@@ -37,10 +40,8 @@ include "header.php";
     <label for="last_name">Last name: </label>
     <input type="text" name="last_name" required/>
 
-  <br />
 
-    <input type="submit"/>
-  </div>
+    <input type="submit" value="Submit registration"/>
   </pre>
 
 </form>
