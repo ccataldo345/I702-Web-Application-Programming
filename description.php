@@ -35,7 +35,7 @@ $row = $results->fetch_assoc();
 if (array_key_exists("user", $_SESSION)) {
 	?>
 	<!--Add to cart button -->
-	 <form method="post" action="cart.php">
+	  <form method="post" action="cart.php">
 	  <input type="hidden" name="id" value="<?=$_GET["id"];?>"/>
 	  <input type="hidden" name="count" value="1"/>
 	  <input type="submit" value="Add to cart"/>

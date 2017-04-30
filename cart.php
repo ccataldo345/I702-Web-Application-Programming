@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 ?>
 
 <h3>Your current shopping cart:</h3>
+<hr>
 
 <?php 
 if (!array_key_exists("user", $_SESSION)) {  //if no user is logged in

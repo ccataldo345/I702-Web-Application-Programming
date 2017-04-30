@@ -36,12 +36,30 @@ header {
     background-color: white;
 }
 
+/*http://google.github.io/material-design-icons/ 
+https://github.com/google/material-design-icons/issues/206 */
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+}
+
 footer {
     color: #fff;
     background-color: #D9853B;
 }
 
 img { 
-    width: 800px;
-    height: 500px;
+    width: 300px;
+    height: 200px;
 }

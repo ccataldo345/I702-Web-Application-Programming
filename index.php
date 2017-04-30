@@ -12,7 +12,7 @@ if (!array_key_exists("timestamp", $_SESSION)) {
 }
 ?>
 
-<a class="icon-home" <h3>HOME PAGE</h3></a>
+<a><h3><i class="material-icons">home</i> HOME PAGE</h3></a>
 <p><small>⏱ You started visiting this page since <?=$_SESSION["timestamp"];?></small></p>
 
 <?php
@@ -22,7 +22,7 @@ if (!array_key_exists("user", $_SESSION)) {  //if no user is logged in
 //($_SESSION["user"]==null) {
        // Otherwise offer login fields and button
    ?>
-<p>Please log in</p>
+<p>Please log in <pre><i>(hint: aaa@aaa.com, aaa)</i></pre></p>
   <!--Show the login:--> 
   <form method="POST" action="login.php">
   <input type="text" name="email"/>
@@ -47,35 +47,36 @@ elseif (array_key_exists("user", $_SESSION)) {  //if some user is logged in
         "SELECT * FROM ccataldo_shop_users
         WHERE id = " . $_SESSION["user"]);
     $row = $results->fetch_assoc();
-    echo "Hello " . $row["salutation"] . " ";
+    echo "<h3>Hello " . $row["salutation"] . " ";
+    echo "<i class='material-icons'>account_box</i>" . " ";
     echo $row["first_name"] . " ";
-    echo $row["last_name"];
+    echo $row["last_name"] . "</h3>";
 
     ?> 
-<br />
-<br />
+
     <form method="POST" action="logout.php">
-    <input type="submit" value="Log out!"/>
+    <input type="submit" value="Log out"/>
   
   <br />
   <br />
 
-  <a href="cart.php">Go to shopping cart</a><br /><br />
+    <a href="cart.php"><i class="material-icons">shopping_cart</i> Go to shopping cart</a><br /><br />
+    <!--https://material.io/icons/#ic_shopping_cart-->
 <?php
 }
 ?>
 
   <h3>🛍 Products list:</h3>
     
-    <ul>
-    <?php /*echo "This is hello from PHP!"*/;
-    
-    $results = $conn->query("SELECT * FROM ccataldo_shop_products;");
-    
-    while ($row = $results->fetch_assoc()) {
-      ?>
+	  <ul>
+	  <?php /*echo "This is hello from PHP!"*/;
+		
+		$results = $conn->query("SELECT * FROM ccataldo_shop_products;");
+		
+		while ($row = $results->fetch_assoc()) {
+			?>
 
-        <li>
+				<li>
            <p style="border: 1px outset;">
               <a href="description.php?id=<?=$row['id']?>">
             <?=$row["name"]?></a>
@@ -85,14 +86,14 @@ elseif (array_key_exists("user", $_SESSION)) {  //if some user is logged in
             </span>
             </p>
         </li>
-        
+				
     <?php
-    }
+		}
  
-    $conn->close();
+		$conn->close();
  
-    ?>
-  
+		?>
+	
 
   <?php include "footer.php" ?>
 
