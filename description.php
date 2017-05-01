@@ -34,7 +34,7 @@ if (array_key_exists("user", $_SESSION)) {
 	  <input type="hidden" name="id" value="<?=$_GET["id"];?>"/>
 	  <input type="hidden" name="count" value="1"/>
 	  <input type="submit" value="Add to cart"/>
-	</form>
+	</form><br>
 <?php
 } 
 else {

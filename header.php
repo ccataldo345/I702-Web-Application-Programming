@@ -1,4 +1,5 @@
 <?php
+//set up cookies:
 session_start();
 
 if (!array_key_exists("cart", $_SESSION)) {

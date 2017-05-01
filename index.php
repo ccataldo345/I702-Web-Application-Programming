@@ -20,6 +20,18 @@ if (!array_key_exists("user", $_SESSION)) {  //if no user is logged in
 <p><small>⏱ You started visiting this page since <?=$_SESSION["timestamp"];?></small></p>
 <hr>
 
+<!--JavaScript user input: enter a number between 1 and 10--> 
+<p>Javascript game<br>Please input a number between 1 and 10:</p>
+<input id="numb">
+
+<button type="button" onclick="myFunction()">Submit</button>
+
+<p id="demo"></p>
+
+<script src="js/game.js"></script>
+
+<hr>
+
 <p>Please log in </p><pre><i>(hint: aaa@aaa.com, aaa)</i></pre>
   <!--Show the login:--> 
   <form method="POST" action="login.php">
@@ -61,7 +73,9 @@ elseif (array_key_exists("user", $_SESSION)) {  //if some user is logged in
     <a href="cart.php"><i class="material-icons">shopping_cart</i> Go to your shopping cart</a><br><br>
     <!--https://material.io/icons/#ic_shopping_cart-->
      
-    <a href="orders.php"><i class="material-icons">content_paste</i> View all your orders</a><br>
+    <a href="orders.php"><i class="material-icons">content_paste</i> View all your orders</a><br><br>
+
+    <a href="upload.php"><i class="material-icons">insert_photo</i> Upload an image</a><br>
 
 <?php
 }
