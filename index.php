@@ -21,7 +21,7 @@ if (!array_key_exists("user", $_SESSION)) {  //if no user is logged in
 <hr>
 
 <!--JavaScript user input: enter a number between 1 and 10--> 
-<p>Javascript game<br>Please input a number between 1 and 10:</p>
+<p>Javascript ADMIN password TO UPLOAD A NEW PRODUCT:<br>(hint: type 1234) </p>
 <input id="numb">
 
 <button type="button" onclick="myFunction()">Submit</button>
