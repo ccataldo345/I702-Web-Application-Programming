@@ -8,7 +8,7 @@ include "dbconn.php"?>
 
 <?php
 $statement = $conn->prepare(
-  "SELECT `name`, `description`, `price` FROM" .
+  "SELECT `name`, `description`, `price`, `image` FROM" .
   " `ccataldo_shop_products` WHERE `id` = ?");
 $statement->bind_param("i", $_GET["id"]);
 $statement->execute();
@@ -20,7 +20,9 @@ $row = $results->fetch_assoc();
 <h2><?=$row["name"];?></h2>
 <p><?=$row["price"];?> EUR</p>
 <hr>
- 
+    <a href="uploads/<?=$row['image']?>">
+    <img src="small/<?=$row['image']?>" alt="<?=$row["name"]?>" style="width:auto;height:300;"></a>
+ <hr>
 <p>
   <?=$row["description"];?>
 </p>
